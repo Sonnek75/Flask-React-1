@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import '../stylesheets/BasicInputForm.css'
+import '../stylesheets/TodoInputForm.css'
 
-export default class BasicInputForm extends Component {
+export default class TodoInputForm extends Component {
     constructor(props) {
         super();
         this.state = {
@@ -39,7 +39,7 @@ export default class BasicInputForm extends Component {
         return (
             <div className='inputForm' id='basicForm'>
                 <form id='inputForm' onSubmit={this.submitData}>
-                    <input type='text' name='input' placeholder='Input Here' onChange={this.handleChange} />
+                    <input type='text' name='input' placeholder='Enter a To-Do' onChange={this.handleChange} />
                     <input type='submit' id='Submit' name='submit' />
                 </form>
             </div>

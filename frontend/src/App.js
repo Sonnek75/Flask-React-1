@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import BasicInputForm from './components/BasicInputForm'
+import TodoInputForm from './components/TodoInputForm'
 import Todo from './components/Todo'
 
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      data: [],
-      testdat: ''
+      todos: [],
+      num: 1
     }
   }
 
-  get_Todos = () => {
+  getTodos = () => {
     const route = 'todos';
     fetch(`http://127.0.0.1:5000/${route}`, {
       method: 'GET',
@@ -23,7 +23,7 @@ class App extends Component {
       .then(response => response.json())
       .then(jsonResponse => {
         this.setState({
-          data: jsonResponse.todos
+          todos: jsonResponse.todos
         })
       })
       .catch(function () {
@@ -32,18 +32,42 @@ class App extends Component {
       })
   }
 
+  deleteTodo = (event) => {
+    if (window.confirm('Are you sure you want to delete the item?')) {
+      event.preventDefault();
+      const id = event.target.dataset['id'];
+      const route = `todos/${id}`;
+      fetch(`http://127.0.0.1:5000/${route}`, {
+        method: 'DELETE',
+      })
+        .then(response => response.json())
+        .then(jsonResponse => {
+          //this.getTodos();
+          window.location.reload(true);
+        })
+        .catch(function () {
+          alert('Unable to delete todo. Please try your request again');
+          return;
+        })
+    }
+  }
+
   componentDidMount = () => {
-    this.get_Todos();
+    this.getTodos();
   }
 
   render() {
     return (
       <div className="App">
-        <BasicInputForm get_Todos={this.get_Todos} />
-        <div>{this.state.data.map((todo) => (
+        <h1>Basic To-Do App</h1>
+        <TodoInputForm get_Todos={this.getTodos} />
+        <h2>Todo List:</h2>
+        <div className="todoList">{this.state.todos.map((todo, index) => (
           <Todo key={todo.id}
             name={todo.name}
-            id={todo.id} />
+            num={index+1}
+            id={todo.id}
+            delete={this.deleteTodo} />
         ))}</div>
       </div>
     )

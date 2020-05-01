@@ -1,0 +1,20 @@
+.todo {
+  display: flex;
+  background-color: white;
+  border: solid black 0.05em;
+}
+
+.todoText {
+  display: flex;
+  padding-left: 1em;
+  flex-wrap: wrap;
+  font-size: 0.85em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgba(0, 3, 163, 0.884);
+}
+
+.deleteBtn {
+  margin-left: 0.5em;
+  align-self: flex-end;
+  font-size: 0.75em;
+}

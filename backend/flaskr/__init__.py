@@ -39,6 +39,17 @@ def create_app(test_config=None):
             abort(422)
         return jsonify({'success': 'success'})
 
+    @app.route('/todos/<todo_id>', methods=['DELETE'])
+    @cross_origin()
+    def delete_todo(todo_id):
+        try:
+            todo = Todo.query.filter(Todo.id == todo_id).one_or_none()
+            todo.delete()
+            todo.close()
+        except:
+            abort(422)
+        return redirect(url_for('get_todos'))
+
     @app.route('/todos', methods=['GET'])
     def get_todos():
         try:
