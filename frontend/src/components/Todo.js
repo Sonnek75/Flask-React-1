@@ -17,7 +17,8 @@ export class Todo extends Component {
             <div className="todo">
                 <ul className="todoText">{this.state.num}. {this.state.name.toUpperCase()}
                     <input className="deleteBtn" type="button" data-id={this.props.id} onClick={this.props.delete} value="Delete" />
-                    <input type="checkbox" defaultChecked={this.state.completed}></input>
+                    <label className="cb-label" for="checkbox">Complete</label>
+                    <input className="completed" name="checkbox" type="checkbox" data-id={this.props.id} checked={this.props.completed} onChange={this.props.setCompleted}/>
                 </ul>
             </div>
         )

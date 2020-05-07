@@ -18,7 +18,7 @@ export default class TodoInputForm extends Component {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ name: this.state.input })
+            body: JSON.stringify({ name: this.state.input, 'completed': false })
         })
             .then(response => response.json())
             .then(jsonResponse => {

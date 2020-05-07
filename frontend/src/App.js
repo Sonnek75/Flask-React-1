@@ -50,6 +50,24 @@ class App extends Component {
     }
   }
 
+  setCompleted = (event) => {
+    const id = event.target.dataset['id'];
+    let checked = event.target.checked;
+    const route = `todos/completed/${id}`;
+    fetch(`http://127.0.0.1:5000/${route}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ 'completed': checked })
+    })
+      .catch(function () {
+        alert('Unable to mark completed. Please try your request again');
+        return;
+      })
+  }
+
+
   componentDidMount = () => {
     this.getTodos();
   }
@@ -66,6 +84,7 @@ class App extends Component {
             num={index + 1}
             id={todo.id}
             completed={todo.completed}
+            setCompleted={this.setCompleted}
             delete={this.deleteTodo} />
         ))}</div>
       </div>

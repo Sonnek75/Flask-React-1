@@ -32,7 +32,8 @@ def create_app(test_config=None):
     def create_todo():
         try:
             name = request.get_json()['name']
-            todo = Todo(name=name, completed=False)
+            completed = request.get_json()['completed']
+            todo = Todo(name=name, completed=completed)
             todo.insert()
             todo.close()
         except:
@@ -59,7 +60,7 @@ def create_app(test_config=None):
             abort(422)
         return jsonify({'success': 'success', 'todos': formatted_todos})
 
-    @app.route('/todos/completed/<todo_id>', methods=["PATCH"])
+    @app.route('/todos/completed/<todo_id>', methods=["POST"])
     def set_completed(todo_id):
         try:
             completed = request.get_json()['completed']

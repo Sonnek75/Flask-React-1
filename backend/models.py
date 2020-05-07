@@ -26,8 +26,9 @@ class Todo(db.Model):
     name = Column(String)
     completed = Column(Boolean, default=False, nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, name, completed):
         self.name = name
+        self.completed = completed
 
     def insert(self):
         db.session.add(self)
@@ -49,5 +50,6 @@ class Todo(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'name': self.name
+            'name': self.name,
+            'completed': self.completed
         }
