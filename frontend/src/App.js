@@ -65,6 +65,7 @@ class App extends Component {
             name={todo.name}
             num={index + 1}
             id={todo.id}
+            completed={todo.completed}
             delete={this.deleteTodo} />
         ))}</div>
       </div>

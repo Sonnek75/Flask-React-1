@@ -32,7 +32,7 @@ def create_app(test_config=None):
     def create_todo():
         try:
             name = request.get_json()['name']
-            todo = Todo(name=name)
+            todo = Todo(name=name, completed=False)
             todo.insert()
             todo.close()
         except:
@@ -48,7 +48,7 @@ def create_app(test_config=None):
             todo.close()
         except:
             abort(422)
-        return redirect(url_for('get_todos'))
+        return jsonify({'success': 'success'})
 
     @app.route('/todos', methods=['GET'])
     def get_todos():
@@ -58,6 +58,18 @@ def create_app(test_config=None):
         except:
             abort(422)
         return jsonify({'success': 'success', 'todos': formatted_todos})
+
+    @app.route('/todos/completed/<todo_id>', methods=["PATCH"])
+    def set_completed(todo_id):
+        try:
+            completed = request.get_json()['completed']
+            todo = Todo.query.filter(Todo.id == todo_id).one_or_none()
+            todo.completed = completed
+            todo.update()
+            todo.close()
+        except:
+            abort(422)
+        return redirect(url_for('get_todos'))
 
     @app.errorhandler(404)
     def not_found(error):

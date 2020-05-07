@@ -25,7 +25,7 @@ class Todo(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     completed = Column(Boolean, default=False, nullable=False)
-  
+
     def __init__(self, name):
         self.name = name
 
