@@ -40,9 +40,7 @@ class App extends Component {
       fetch(`http://127.0.0.1:5000/${route}`, {
         method: 'DELETE',
       })
-        .then(response => response.json())
-        .then(jsonResponse => {
-          //this.getTodos();
+        .then(() => {
           window.location.reload(true);
         })
         .catch(function () {
@@ -65,7 +63,7 @@ class App extends Component {
         <div className="todoList">{this.state.todos.map((todo, index) => (
           <Todo key={todo.id}
             name={todo.name}
-            num={index+1}
+            num={index + 1}
             id={todo.id}
             delete={this.deleteTodo} />
         ))}</div>

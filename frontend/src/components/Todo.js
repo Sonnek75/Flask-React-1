@@ -16,6 +16,7 @@ export class Todo extends Component {
             <div className="todo">
                 <ul className="todoText">{this.state.num}. {this.state.name.toUpperCase()}
                     <input className="deleteBtn" type="button" data-id={this.props.id} onClick={this.props.delete} value="Delete" />
+                    <input type="checkbox" checked="unchecked"></input>
                 </ul>
             </div>
         )
