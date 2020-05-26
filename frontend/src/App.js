@@ -60,13 +60,15 @@ class App extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ 'completed': checked })
+    }).then(() => {
+      this.setState({ completed: checked });
+      this.getTodos();
     })
       .catch(function () {
         alert('Unable to mark completed. Please try your request again');
         return;
       })
   }
-
 
   componentDidMount = () => {
     this.getTodos();

@@ -54,7 +54,7 @@ def create_app(test_config=None):
     @app.route('/todos', methods=['GET'])
     def get_todos():
         try:
-            todos = Todo.query.all()
+            todos = Todo.query.order_by('id').all()
             formatted_todos = [todo.format() for todo in todos]
         except:
             abort(422)
